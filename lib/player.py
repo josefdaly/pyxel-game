@@ -68,18 +68,20 @@ class Player(MovingObject):
     def draw_weapon(self):
         if self.is_attacking:
             if self.last_dir == self.game.DIR_LEFT:
-                pyxel.blt(*((self.x-self.width, self.y,) + self.WEAPON_SPRITE  + (-self.width, self.height)))
+                pyxel.blt(*((self.x-self.width, self.y,) + self.WEAPON_SPRITE  + (-self.width, self.height)), colkey=7)
             elif self.last_dir == self.game.DIR_RIGHT:
-                pyxel.blt(*((self.x+self.width, self.y,) + self.WEAPON_SPRITE  + (self.width, self.height)))
+                pyxel.blt(*((self.x+self.width, self.y,) + self.WEAPON_SPRITE  + (self.width, self.height)), colkey=7)
             elif self.last_dir == self.game.DIR_UP:
                 pyxel.blt(
                     *((self.x, self.y-self.height,) + self.WEAPON_SPRITE  + (-self.width, self.height)),
-                    rotate=-90
+                    rotate=-90,
+                    colkey=7
                 )
             elif self.last_dir == self.game.DIR_DOWN:
                 pyxel.blt(
                     *((self.x, self.y+self.height,) + self.WEAPON_SPRITE  + (-self.width, self.height)),
-                    rotate=90
+                    rotate=90,
+                    colkey=7
                 )
 
     def update(self):

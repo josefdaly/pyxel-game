@@ -37,17 +37,17 @@ class MovingObject:
         return self.FRONT_SPRITE
 
     def _get_sprite(self):
-        # overwrite in child class
         return self._get_sprite_tuple() + (self.width, self.height)
 
     def get_sprite(self):
+        # overwrite in child class
         return self._get_sprite()
 
     def set_dir(self, d):
         self.last_dir = d
 
     def draw(self):
-        pyxel.blt(self.x, self.y, *self.get_sprite())
+        pyxel.blt(self.x, self.y, *self.get_sprite(), colkey=7)
 
     def set_vel(self, degrees):
         radians = math.radians(degrees)

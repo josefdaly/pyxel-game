@@ -11,9 +11,13 @@ class Game:
     DIR_DOWN = 0
     DIR_LEFT = 270
     DIR_RIGHT = 90
+    TILE_WIDTH = 8
+    TILE_HEIGHT = 8
+    SCREEN_WIDTH = 128
+    SCREEN_HEIGHT = 88
     
     def __init__(self, x, y):
-        pyxel.init(192, 128)
+        pyxel.init(self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
         pyxel.load("PYXEL_RESOURCE_FILE.pyxres")
         self.player = Player(
             x, y, self,
@@ -70,9 +74,13 @@ class Game:
         self.player.move()
         self.player.update()
 
+    def draw_map(self):
+        pyxel.bltm(0,0,0,0,0,self.SCREEN_WIDTH,self.SCREEN_HEIGHT)
+
     def draw(self):
         pyxel.cls(0)
+        self.draw_map()
         self.player.draw()
         self.player.draw_weapon()
 
-Game(5,10)
+Game(50,50)
