@@ -11,20 +11,37 @@ class Game:
     DIR_DOWN = 0
     DIR_LEFT = 270
     DIR_RIGHT = 90
+
     TILE_WIDTH = 8
     TILE_HEIGHT = 8
-    SCREEN_WIDTH = 128
-    SCREEN_HEIGHT = 88
+    ROOM_WIDTH = 16
+    ROOM_HEIGHT = 11
     
+    SCREEN_WIDTH = TILE_WIDTH * ROOM_WIDTH
+    SCREEN_HEIGHT = TILE_HEIGHT * ROOM_HEIGHT
+
     def __init__(self, x, y):
-        pyxel.init(self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
+        pyxel.init(self.SCREEN_WIDTH, self.SCREEN_HEIGHT,)
         pyxel.load("PYXEL_RESOURCE_FILE.pyxres")
         self.player = Player(
             x, y, self,
         )
         self.angle = 0
         pyxel.run(self.update, self.draw)
-    
+
+    def generate_map(self):
+        overworld_maps = blockshaped(
+            parse_overworld_data('assets/nes_zelda_overworld_tile_map.txt', ' '),
+            ROOM_HEIGHT,
+            ROOM_WIDTH,
+        )
+
+        blockshaped(
+            parse_overworld_data('assets/nes_zelda_overworld_blocking_map.txt'),
+            ROOM_HEIGHT,
+            ROOM_WIDTH,
+        )
+
     @property
     def up(self):
         return pyxel.btn(pyxel.KEY_UP)
